@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prod Lab Frontend</title>
+</head>
+
+<body>
+    <h1>Welcome to Prod Lab Frontend</h1>
+    <button id="btn">Check backend health.</button>
+    <pre id="out"></pre>
+
+    <script>
+        const out = document.getElementById("out");
+        document.getElementById('btn').addEventListener('click', async () => {
+            out.textContent = 'Loading...';
+            try {
+                const res = await fetch('http://localhost:8080/health');
+                const data = await res.json();
+                out.textContent = JSON.stringify(data, null, 2);
+            } catch (err) {
+                out.textContent = `Error: ${err.message}`;
+            }
+        });
+    </script>
+</body>
+
+</html>
