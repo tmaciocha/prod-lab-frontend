@@ -23,8 +23,11 @@ jobs:
 
             - name: Build Image
               run: |
-                  docker build -t ghcr.io/${{ github.repository_owner }}/prod-lab-frontend:${{ github.sha }} .
+                  docker build \
+                    -t ghcr.io/${{ github.repository_owner }}/prod-lab-frontend:${{ github.sha }} \
+                    -t ghcr.io/${{ github.repository_owner }}/prod-lab-frontend:main .
 
             - name: Push Image
               run: |
                   docker push ghcr.io/${{ github.repository_owner }}/prod-lab-frontend:${{ github.sha }}
+                  docker push ghcr.io/${{ github.repository_owner }}/prod-lab-frontend:main
